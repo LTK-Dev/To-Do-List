@@ -32,6 +32,14 @@ function addTask() {
     saveData();
 }
 
+// Ham xu ly input Enter
+inputBox.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("myBtn").click();
+  }
+});
+
 // Ham xoa bo va check
 listContainer.addEventListener("click", function(e){
     if (e.target.tagName === "LI") {
