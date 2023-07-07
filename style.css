@@ -28,6 +28,7 @@
 .titlebar {
     width: 100%;
     border-radius: 10px;
+    background: #f3f1f4;
     position: absolute;
     top: 0;
     left: 0;
