@@ -51,8 +51,8 @@
     border-radius: 50%;
 }
 .dot span:nth-child(1){background-color: #fc5653;}
-.dot span:nth-child(2){background-color: #33c748;}
-.dot span:nth-child(3){background-color: #fdbc40;}
+.dot span:nth-child(2){background-color: #fdbc40;}
+.dot span:nth-child(3){background-color: #33c748;}
 
 .todo-app h2 {
     color: #002765;
