@@ -54,6 +54,7 @@
 .dot span:nth-child(2){background-color: #fdbc40;}
 .dot span:nth-child(3){background-color: #33c748;}
 
+/* To-do app main*/
 .todo-app h2 {
     color: #002765;
     display: flex;
@@ -157,6 +158,7 @@ ul li span:hover {
 .fa-solid fa-trash {
     font-size: 20px;
 }
+/* src */
 .footer {
     position:absolute;
     bottom: 1rem;
