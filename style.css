@@ -27,7 +27,6 @@
 /* MacOs tile bar*/
 .titlebar {
     width: 100%;
-    background-color: #f9f4f8;
     border-radius: 10px;
     position: absolute;
     top: 0;
