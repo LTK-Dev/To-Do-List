@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 10px;
+    background-image: url(images/macos-monterey-wwdc-21-stock-5k-6016x3384-5584.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.todo-app {
+    width: 100%;
+    max-width: 540px;
+    background: #f3f1f4;
+    margin: 100px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* MacOs tile bar*/
+.titlebar {
+    width: 100%;
+    background-color: #f9f4f8;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.bar {
+    border:solid 0.02rem #dcdcdc; 
+}
+.dot {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+}
+
+.dot span {
+    height: 0.8rem;
+    width: 0.8rem;
+    margin-left: 0.5rem;
+
+    background-color: #cacaca;
+    border-radius: 50%;
+}
+.dot span:nth-child(1){background-color: #fc5653;}
+.dot span:nth-child(2){background-color: #33c748;}
+.dot span:nth-child(3){background-color: #fdbc40;}
+
+.todo-app h2 {
+    color: #002765;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.todo-app img {
+    width: 30px;
+    margin-left: 10px;
+}
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ebebec;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px;
+    font-weight: 14px;
+}
+button {
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    background: rgb(252,196,44);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+    transition: 0.2s;
+}
+button:hover{
+    background: rgb(196, 157, 2);
+}
+ul {
+    max-height: 45vh;
+    overflow: auto;
+}
+ul li {
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+ul li:hover {
+    background: #ddd;
+    border-radius: 30px;
+}
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-image: url(images/unchecked.png);
+    background-size: cover;
+    background-position: center;
+    top: 10px;
+    left: 8px;
+}
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+ul li.checked::before {
+    background-image: url(images/checked.png);
+}
+
+ul li span {
+    position: absolute;
+    right: 0;
+    top: 3.5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+
+}
+
+ul li span:hover {
+    background: #edeef0;
+}
+
+.fa-solid fa-trash {
+    font-size: 20px;
+}
+.footer {
+    position:absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 12px;
+    text-decoration: none;
+    color: #6e6e73;
+}
