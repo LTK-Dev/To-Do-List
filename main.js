@@ -10,21 +10,34 @@ function addTask() {
         return;
     }
     else {
-        // Tao mot tag li moi
         let li = document.createElement("li");
-        // Gan gia tri
-        li.innerHTML = inputBox.value;
-        // Gan tag li vao tag id listcontainer
+        let input = document.createElement("input");
+        input.value = inputBox.value;
+        input.readOnly = true;
+        input.className = "none";
+        input.maxLength = 37;
+        li.appendChild(input);
         listContainer.appendChild(li);
 
         // Gan nut delete
         let span = document.createElement("span");
         span.innerHTML = "";
+        span.className = "delete_button";
         let i = document.createElement("i");
         i.innerHTML = "";
         i.className = "fa-solid fa-trash";
         span.appendChild(i);
         li.appendChild(span);
+
+        // Gan nut edit
+        let span_edit = document.createElement("span");
+        span_edit.innerHTML = "";
+        span_edit.className = "edit_button";
+        let i_edit = document.createElement("i");
+        i_edit.innerHTML = "";
+        i_edit.className = "fa-solid fa-pen-to-square";
+        span_edit.appendChild(i_edit);
+        li.appendChild(span_edit);
     }
     // Xoa du lieu dang luu o input
     inputBox.value = "";
@@ -40,18 +53,85 @@ inputBox.addEventListener("keypress", function(event) {
   }
 });
 
+
 // Ham xoa bo va check
 listContainer.addEventListener("click", function(e){
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
         saveData();
     }
-    else if (e.target.tagName === "SPAN" ) {
+    else if (e.target.className === "delete_button" ) {
         e.target.parentElement.remove();
         saveData();
     }
-    else if (e.target.tagName === "I") {
+    else if (e.target.className === "fa-solid fa-trash") {
         e.target.parentElement.parentElement.remove();
+        saveData();
+    }
+    else if (e.target.className === "edit_button" ) {
+        let tmp = e.target;
+        let li = e.target.parentElement;
+        let input = li.firstChild;
+        input.readOnly = false;
+        input.className = "line";
+        input.maxLength = 37;
+
+        e.target.className = "close_button";
+        e.target.children.className = "fa-solid fa-x";
+        saveData();
+
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              input.readOnly = true;
+              input.className = "none";
+                tmp.className = "edit_button";
+                tmp.children.className = "fa-solid fa-pen-to-square";
+            }
+        });
+        saveData();
+    }
+    else if (e.target.className === "fa-solid fa-pen-to-square") {
+        let tmp = e.target;
+        let li = e.target.parentElement.parentElement;
+        let input = li.firstChild;
+        input.readOnly = false;
+        input.className = "line";
+        input.maxLength = 37;
+
+        e.target.className = "fa-solid fa-x";
+        e.target.parentElement.className = "close_button";
+        saveData();
+
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              input.readOnly = true;
+              input.className = "none";
+                tmp.children.className = "edit_button";
+                tmp.className = "fa-solid fa-pen-to-square";
+            }
+        });
+        saveData();
+    }
+    else if (e.target.className === "close_button" ) {
+        let li = e.target.parentElement;
+        let input = li.firstChild;
+        input.readOnly = true;
+        input.className = "none";
+
+        e.target.className = "edit_button";
+        e.target.children.className = "fa-solid fa-pen-to-square";
+        saveData();
+    }
+    else if (e.target.className === "fa-solid fa-x") {
+        let li = e.target.parentElement.parentElement;
+        let input = li.firstChild;
+        input.readOnly = true;
+        input.className = "none";
+        
+        e.target.className = "fa-solid fa-pen-to-square";
+        e.target.parentElement.className = "edit_button";
         saveData();
     }
 },false);
