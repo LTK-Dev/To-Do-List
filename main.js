@@ -1,6 +1,7 @@
 // Cac Bien check input
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+let tasks = [];
 
 // Add element and a delete icon
 function addTask() {
@@ -9,14 +10,17 @@ function addTask() {
         // Khong input thi end frunction
         return;
     }
-    else {
+    else { 
+        // Gan input vao li
         let li = document.createElement("li");
         let input = document.createElement("input");
-        input.value = inputBox.value;
+        //input.value = inputBox.value;
+        input.setAttribute("value", inputBox.value);
         input.readOnly = true;
         input.className = "none";
         input.maxLength = 37;
         li.appendChild(input);
+        // CORE UPDATE LI
         listContainer.appendChild(li);
 
         // Gan nut delete
@@ -61,11 +65,14 @@ listContainer.addEventListener("click", function(e){
         saveData();
     }
     else if (e.target.className === "delete_button" ) {
+
+        //activateDeleteListeners_button();
         e.target.parentElement.remove();
         saveData();
     }
     else if (e.target.className === "fa-solid fa-trash") {
-        e.target.parentElement.parentElement.remove();
+       // activateDeleteListeners_icon();
+       e.target.parentElement.parentElement.remove();
         saveData();
     }
     else if (e.target.className === "edit_button" ) {
@@ -78,8 +85,6 @@ listContainer.addEventListener("click", function(e){
 
         e.target.className = "close_button";
         e.target.children.className = "fa-solid fa-x";
-        saveData();
-
         input.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
               event.preventDefault();
@@ -87,7 +92,13 @@ listContainer.addEventListener("click", function(e){
               input.className = "none";
                 tmp.className = "edit_button";
                 tmp.children.className = "fa-solid fa-pen-to-square";
+                saveData();
             }
+        });
+        saveData();
+        li.firstChild.addEventListener("input", function(event) {
+            const newValue = event.target.value;
+            li.firstChild.setAttribute("value", newValue); // Update the value attribute
         });
         saveData();
     }
@@ -101,8 +112,6 @@ listContainer.addEventListener("click", function(e){
 
         e.target.className = "fa-solid fa-x";
         e.target.parentElement.className = "close_button";
-        saveData();
-
         input.addEventListener("keypress", function(event) {
             if (event.key === "Enter") {
               event.preventDefault();
@@ -110,7 +119,13 @@ listContainer.addEventListener("click", function(e){
               input.className = "none";
                 tmp.children.className = "edit_button";
                 tmp.className = "fa-solid fa-pen-to-square";
+                saveData();
             }
+        });
+        saveData();
+        li.firstChild.addEventListener("input", function(event) {
+            const newValue = event.target.value;
+            li.firstChild.setAttribute("value", newValue); // Update the value attribute
         });
         saveData();
     }
@@ -139,10 +154,23 @@ listContainer.addEventListener("click", function(e){
 // Ham luu data vao trinh duyet
 function saveData() {
     localStorage.setItem("data",listContainer.innerHTML);
+    //localStorage.setItem("inputValues", JSON.stringify(tasks));
 }
 // Ham display data moi lan ta mo lai web
 function showTask() {
     listContainer.innerHTML = localStorage.getItem("data");
+//     // Retrieve the array of values from localStorage
+//     let tasks_string = localStorage.getItem("inputValues");
+
+// // Convert the JSON string back to an array
+//  tasks = JSON.parse(tasks_string);
+
+// // Update the values of the input elements in the NodeList
+//  let listInput = document.querySelectorAll("li > input");
+// listInput.forEach((input, index) => {
+//   input.value = tasks[index];
+//});
 }
 
+// Hien thi ra man hinh 
 showTask();
