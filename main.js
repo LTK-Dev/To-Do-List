@@ -165,6 +165,7 @@ function showTask() {
     listContainer.innerHTML = localStorage.getItem("data");
 }
 // Sử dụng Sortable để thêm chức năng kéo thả
+// Set animation va saveData() 
 const sortable = new Sortable(listContainer, {
     animation: 250,
     onEnd: function () {
