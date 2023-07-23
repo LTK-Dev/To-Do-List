@@ -1,7 +1,6 @@
 // Cac Bien check input
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
-let tasks = [];
 
 // Add element and a delete icon
 function addTask() {
@@ -20,6 +19,10 @@ function addTask() {
         input.className = "none";
         input.maxLength = 37;
         li.appendChild(input);
+
+        // Set drag to li
+        li.setAttribute('draggable', 'true');
+
         // CORE UPDATE LI
         listContainer.appendChild(li);
 
@@ -47,6 +50,7 @@ function addTask() {
     inputBox.value = "";
     // Luu lai data vao trinh duyet
     saveData();
+    
 }
 
 // Ham xu ly input Enter
@@ -78,7 +82,7 @@ listContainer.addEventListener("click", function(e){
     else if (e.target.className === "edit_button" ) {
         let tmp = e.target;
         let li = e.target.parentElement;
-        let input = li.firstChild;
+        let input = li.getElementsByTagName('input')[0];
         input.readOnly = false;
         input.className = "line";
         input.maxLength = 37;
@@ -96,16 +100,16 @@ listContainer.addEventListener("click", function(e){
             }
         });
         saveData();
-        li.firstChild.addEventListener("input", function(event) {
+        li.getElementsByTagName('input')[0].addEventListener("input", function(event) {
             const newValue = event.target.value;
-            li.firstChild.setAttribute("value", newValue); // Update the value attribute
+            li.getElementsByTagName('input')[0].setAttribute("value", newValue); // Update the value attribute
         });
         saveData();
     }
     else if (e.target.className === "fa-solid fa-pen-to-square") {
         let tmp = e.target;
         let li = e.target.parentElement.parentElement;
-        let input = li.firstChild;
+        let input = li.getElementsByTagName('input')[0];
         input.readOnly = false;
         input.className = "line";
         input.maxLength = 37;
@@ -123,15 +127,15 @@ listContainer.addEventListener("click", function(e){
             }
         });
         saveData();
-        li.firstChild.addEventListener("input", function(event) {
+        li.getElementsByTagName('input')[0].addEventListener("input", function(event) {
             const newValue = event.target.value;
-            li.firstChild.setAttribute("value", newValue); // Update the value attribute
+            li.getElementsByTagName('input')[0].setAttribute("value", newValue); // Update the value attribute
         });
         saveData();
     }
     else if (e.target.className === "close_button" ) {
         let li = e.target.parentElement;
-        let input = li.firstChild;
+        let input = li.getElementsByTagName('input')[0];
         input.readOnly = true;
         input.className = "none";
 
@@ -141,7 +145,7 @@ listContainer.addEventListener("click", function(e){
     }
     else if (e.target.className === "fa-solid fa-x") {
         let li = e.target.parentElement.parentElement;
-        let input = li.firstChild;
+        let input = li.getElementsByTagName('input')[0];
         input.readOnly = true;
         input.className = "none";
         
@@ -159,18 +163,14 @@ function saveData() {
 // Ham display data moi lan ta mo lai web
 function showTask() {
     listContainer.innerHTML = localStorage.getItem("data");
-//     // Retrieve the array of values from localStorage
-//     let tasks_string = localStorage.getItem("inputValues");
-
-// // Convert the JSON string back to an array
-//  tasks = JSON.parse(tasks_string);
-
-// // Update the values of the input elements in the NodeList
-//  let listInput = document.querySelectorAll("li > input");
-// listInput.forEach((input, index) => {
-//   input.value = tasks[index];
-//});
 }
+// Sử dụng Sortable để thêm chức năng kéo thả
+const sortable = new Sortable(listContainer, {
+    animation: 250,
+    onEnd: function () {
+      saveData();
+    }
+});
 
 // Hien thi ra man hinh 
 showTask();
